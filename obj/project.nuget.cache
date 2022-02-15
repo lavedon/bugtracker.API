@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "EWXqUPOGThm0ARoTZqSuf9gICvEAJQWfEM+pDuNn4ShzTdt3sOt0uoo1SdTuxoF+GbXJ4O9tMkSO47SlinnU6Q==",
+  "dgSpecHash": "qo7SvrlkSV1NmYUGvxwv5HC6tbMQ5PTGsTuv39NIyicNtmn5uOLxoimBsN6UmHA7NubfbDz2CzxEbyvygCJ9ug==",
   "success": true,
-  "projectFilePath": "C:\\my-coding-projects\\BugTracker Portfolio Project\\BugTracker\\BugTracker.csproj",
+  "projectFilePath": "C:\\my-coding-projects\\BugTrackerAPI\\BugTracker.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\User\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\User\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\6.0.1\\microsoft.aspnetcore.authentication.jwtbearer.6.0.1.nupkg.sha512",
