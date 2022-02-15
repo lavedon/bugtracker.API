@@ -1,0 +1,5 @@
+{
+    "appService.preDeployTask": "publish-release",
+    "appService.deploySubpath": "bin\\Release\\net6.0\\publish",
+    "appService.defaultWebAppToDeploy": "/subscriptions/4ad9b854-4593-46f3-92eb-37b334fc11cd/resourceGroups/lavedon_rg_2914/providers/Microsoft.Web/sites/MainBugTrackerPortfolioProject"
+}
