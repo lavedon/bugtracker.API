@@ -130,6 +130,10 @@ app.MapPost("/api/createproject",
     .Produces<Project>(statusCode: 200, contentType: "application/json");
 
 // Ticket end points
+app.MapDelete("/api/deleteticket/{id}",
+[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Standard, Admin")]
+(int id, ITicketService ticketService, AppDbContext db) => DeleteTicket(id, ticketService, db));
+
 app.MapPost("/api/createticket", 
 [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Standard, Admin")]
 (TicketDTO ticket, IProjectService projectService, IUserService userService, ITicketService ticketService, AppDbContext db) 
@@ -140,6 +144,15 @@ app.MapPost("/api/createticket",
 app.MapGet("/api/getalltickets",
 [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Standard, Admin")]
 (ITicketService ticketService, IUserService userService, IProjectService projectService, AppDbContext db) => GetAllTickets(ticketService, db));
+
+IResult DeleteTicket(int id, ITicketService ticketService, AppDbContext db)
+{
+    var result = ticketService.Delete(id, db);
+
+    if (!result) Results.BadRequest("Could not delete ticket");
+
+    return Results.Ok();
+}
 
 IResult CreateTicket(TicketDTO ticket, IProjectService projectService, IUserService userService, ITicketService ticketService, AppDbContext db)
 {

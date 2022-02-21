@@ -27,8 +27,12 @@ public class TicketService : ITicketService
     }
     public bool Delete(int id, AppDbContext db)
     {
-        Ticket ticketToDelete = db.Tickets.FirstOrDefault(t => t.Id == id);
-        if (ticketToDelete == null)
+        
+        var ticketToDelete = db.Tickets.Include(t => t.Project)
+            .Include(t => t.UserCreated)
+            .Include(t => t.UserAssigned)
+            .Single(t => t.Id == id);
+        if (ticketToDelete is DBNull)
         {
             return false;
         }
