@@ -2698,11 +2698,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\my-coding-projects\\BugTrackerAPI\\BugTracker.csproj",
+      "projectUniqueName": "C:\\my-coding-projects\\Bug Tracker Multiple Repos\\BugTrackerAPI\\BugTracker.csproj",
       "projectName": "BugTracker",
-      "projectPath": "C:\\my-coding-projects\\BugTrackerAPI\\BugTracker.csproj",
+      "projectPath": "C:\\my-coding-projects\\Bug Tracker Multiple Repos\\BugTrackerAPI\\BugTracker.csproj",
       "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-      "outputPath": "C:\\my-coding-projects\\BugTrackerAPI\\obj\\",
+      "outputPath": "C:\\my-coding-projects\\Bug Tracker Multiple Repos\\BugTrackerAPI\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -2784,7 +2784,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.102\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.200\\RuntimeIdentifierGraph.json"
       }
     }
   }

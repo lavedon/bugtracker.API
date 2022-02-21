@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BugTracker.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220122183012_ProjectsAndTickets")]
-    partial class ProjectsAndTickets
+    [Migration("20220221093738_cascadeDeleteWithProjects")]
+    partial class cascadeDeleteWithProjects
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

@@ -25,13 +25,20 @@ public class ProjectService : IProjectService
 
     public bool Delete(int id, AppDbContext db)
     {
-       var project = db.Projects.FirstOrDefault(p => p.Id == id);
+
+        var project = db.Projects.Include(p => p.Tickets)
+             .Single(p => p.Id == id);
 
        if (project is null) return false;
-
-       db.Projects.Remove(project);
-       db.SaveChanges();
-
+        
+        try { 
+            db.Projects.Remove(project);
+            db.SaveChanges();
+        }
+        catch(Exception ex)
+        {
+            Console.WriteLine($"Tried to delete project: {id}" + ex);
+        }
        return true;
     }
 

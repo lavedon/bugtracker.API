@@ -23,7 +23,7 @@ public class AppDbContext : DbContext
                 .HasOne(u => u.UserCreated)
                 .WithMany(p => p.ProjectsCreated)
                 .HasForeignKey(u => u.UserCreatedId)
-                .OnDelete(DeleteBehavior.SetNull);
+                .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<Ticket>()
                 .HasOne(t => t.Project)
@@ -42,5 +42,10 @@ public class AppDbContext : DbContext
                 .WithMany(u => u.TicketsCreated)
                 .HasForeignKey(t => t.UserCreatedId)
                 .OnDelete(DeleteBehavior.SetNull);
+        }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.EnableSensitiveDataLogging();
         }
 }
