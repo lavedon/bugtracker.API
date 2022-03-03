@@ -83,7 +83,7 @@ app.UseCors(policy =>
 
 #else
 app.UseCors(policy =>
-    policy.WithOrigins("https://lukebug.com")
+    policy.Al
         .AllowAnyMethod()
         .AllowAnyHeader()
         .AllowCredentials());
@@ -189,7 +189,7 @@ IResult UpdateProject(Project newProject, IProjectService service, AppDbContext 
 {
     Project updatedProject = service.Update(newProject, db);
 
-    if (updatedProject is null) Results.NotFound("Movie not found");
+    if (updatedProject is null) Results.NotFound("Project not found");
 
     return Results.Ok(updatedProject);
 }

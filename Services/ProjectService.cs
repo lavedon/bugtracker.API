@@ -79,7 +79,8 @@ public class ProjectService : IProjectService
 
         oldProject.Name = newProject.Name;
         oldProject.Description = newProject.Description;
-        oldProject.UserCreated = db.Users.FirstOrDefault(u => u.Username.Equals(newProject.UserCreated));
+        db.SaveChanges();
+        // oldProject.UserCreated = db.Users.FirstOrDefault(u => u.Username.Equals(newProject.UserCreated));
 
         return oldProject;
     }

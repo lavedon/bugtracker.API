@@ -712,3 +712,11 @@ C:\my-coding-projects\BugTrackerAPI\obj\Release\net6.0\BugTracker.dll
 C:\my-coding-projects\BugTrackerAPI\obj\Release\net6.0\ref\BugTracker.dll
 C:\my-coding-projects\BugTrackerAPI\obj\Release\net6.0\BugTracker.pdb
 C:\my-coding-projects\BugTrackerAPI\obj\Release\net6.0\BugTracker.genruntimeconfig.cache
+C:\my-coding-projects\Bug Tracker Multiple Repos\BugTrackerAPI\obj\Release\net6.0\BugTracker.csproj.AssemblyReference.cache
+C:\my-coding-projects\Bug Tracker Multiple Repos\BugTrackerAPI\obj\Release\net6.0\MvcTestingAppManifest.json
+C:\my-coding-projects\Bug Tracker Multiple Repos\BugTrackerAPI\obj\Release\net6.0\BugTracker.GeneratedMSBuildEditorConfig.editorconfig
+C:\my-coding-projects\Bug Tracker Multiple Repos\BugTrackerAPI\obj\Release\net6.0\BugTracker.csproj.CoreCompileInputs.cache
+C:\my-coding-projects\Bug Tracker Multiple Repos\BugTrackerAPI\obj\Release\net6.0\BugTracker.MvcApplicationPartsAssemblyInfo.cs
+C:\my-coding-projects\Bug Tracker Multiple Repos\BugTrackerAPI\obj\Release\net6.0\BugTracker.MvcApplicationPartsAssemblyInfo.cache
+C:\my-coding-projects\Bug Tracker Multiple Repos\BugTrackerAPI\obj\Release\net6.0\BugTracker.dll
+C:\my-coding-projects\Bug Tracker Multiple Repos\BugTrackerAPI\obj\Release\net6.0\BugTracker.pdb
