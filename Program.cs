@@ -83,7 +83,7 @@ app.UseCors(policy =>
 
 #else
 app.UseCors(policy =>
-    policy.Al
+    policy.WithOrigins("https://lukebug.com")
         .AllowAnyMethod()
         .AllowAnyHeader()
         .AllowCredentials());
