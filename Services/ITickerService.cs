@@ -12,7 +12,7 @@ public interface ITicketService {
     public List<Ticket> GetByUserCreated(string name, AppDbContext db);
     public List<User> GetAssignedUsers (string name, AppDbContext db);
     public List<Ticket> GetByProject(string name, AppDbContext db);
-    public bool Update(Ticket ticket, AppDbContext db);
+    public Ticket UpdateTicket(Ticket ticket, AppDbContext db);
     public bool Delete(string name, AppDbContext db); 
     public bool Delete(int id, AppDbContext db);
 }

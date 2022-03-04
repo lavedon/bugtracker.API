@@ -87,9 +87,16 @@ public class TicketService : ITicketService
         return db.Tickets.Where(t => t.UserCreated.Equals(name)).ToList();
     }
 
-    public bool Update(Ticket ticket, AppDbContext db)
+    public Ticket UpdateTicket(Ticket newTicket, AppDbContext db)
     {
-         db.Tickets.Update(ticket);
-         return true;
+        Ticket oldTicket = db.Tickets.FirstOrDefault(t => t.Id == newTicket.Id);
+
+        if (oldTicket is null) return null;
+
+        oldTicket.Name = newTicket.Name;
+        oldTicket.Description = newTicket.Description;
+        db.SaveChanges();
+
+        return oldTicket;
     }
 }

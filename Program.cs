@@ -134,6 +134,11 @@ app.MapDelete("/api/deleteticket/{id}",
 [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Standard, Admin")]
 (int id, ITicketService ticketService, AppDbContext db) => DeleteTicket(id, ticketService, db));
 
+app.MapPut("/api/updateticket/{id}",
+[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Standard, Admin")]
+(Ticket ticket, ITicketService ticketService, AppDbContext db) => UpdateTicket(ticket, ticketService, db));
+
+
 app.MapPost("/api/createticket", 
 [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Standard, Admin")]
 (TicketDTO ticket, IProjectService projectService, IUserService userService, ITicketService ticketService, AppDbContext db) 
@@ -152,6 +157,16 @@ IResult DeleteTicket(int id, ITicketService ticketService, AppDbContext db)
     if (!result) Results.BadRequest("Could not delete ticket");
 
     return Results.Ok();
+}
+
+IResult UpdateTicket(Ticket ticket, ITicketService ticketService, AppDbContext db)
+{
+    Ticket updatedTicket = ticketService.UpdateTicket(ticket, db);
+
+    if (updatedTicket is null) Results.NotFound("Ticket not found");
+
+    return Results.Ok(updatedTicket);
+
 }
 
 IResult CreateTicket(TicketDTO ticket, IProjectService projectService, IUserService userService, ITicketService ticketService, AppDbContext db)
