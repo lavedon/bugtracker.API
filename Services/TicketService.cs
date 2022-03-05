@@ -78,7 +78,7 @@ public class TicketService : ITicketService
 
     public List<Ticket> GetByProject(string name, AppDbContext db)
     {
-        int idOfProject = db.Projects.FirstOrDefault(p => p.Name.Equals(name)).Id;
+        int? idOfProject = db.Projects.FirstOrDefault(p => p.Name.Equals(name)).Id;
         return db.Tickets.Where(t => t.ProjectId == idOfProject).ToList();
     }
 
@@ -92,9 +92,15 @@ public class TicketService : ITicketService
         Ticket oldTicket = db.Tickets.FirstOrDefault(t => t.Id == newTicket.Id);
 
         if (oldTicket is null) return null;
+        newTicket.ProjectId = db.Projects.FirstOrDefault(p => p.Name == newTicket.Project.Name).Id;
+        newTicket.UserAssignedId = db.Users.FirstOrDefault(u => u.Username == newTicket.UserAssigned.Username).Id;
 
         oldTicket.Name = newTicket.Name;
         oldTicket.Description = newTicket.Description;
+        oldTicket.ProjectId = newTicket.ProjectId;
+        oldTicket.UserAssignedId = newTicket.UserAssignedId;
+
+
         db.SaveChanges();
 
         return oldTicket;

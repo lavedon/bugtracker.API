@@ -4,7 +4,7 @@ using BugTracker.Data;
 namespace BugTracker.Services;
 
 public interface IProjectService {
-    public int Create(ProjectDTO project, AppDbContext db);
+    public int? Create(ProjectDTO project, AppDbContext db);
     public Project GetById(int id, AppDbContext db);
     public Project GetByName(string name, AppDbContext db);
     public List<Project> GetAll(AppDbContext db);

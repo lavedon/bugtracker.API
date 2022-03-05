@@ -23,24 +23,28 @@ public class AppDbContext : DbContext
                 .HasOne(u => u.UserCreated)
                 .WithMany(p => p.ProjectsCreated)
                 .HasForeignKey(u => u.UserCreatedId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .IsRequired(false)
+                .OnDelete(DeleteBehavior.SetNull);
 
             modelBuilder.Entity<Ticket>()
                 .HasOne(t => t.Project)
                 .WithMany(p => p.Tickets)
                 .HasForeignKey(t => t.ProjectId)
+                .IsRequired(false)
                 .OnDelete(DeleteBehavior.SetNull);
 
             modelBuilder.Entity<Ticket>()
                 .HasOne(t => t.UserAssigned)
                 .WithMany(u => u.TicketsAssigned)
                 .HasForeignKey(t => t.UserAssignedId)
+                .IsRequired(false)
                 .OnDelete(DeleteBehavior.SetNull);
                 
             modelBuilder.Entity<Ticket>()
                 .HasOne(t => t.UserCreated)
                 .WithMany(u => u.TicketsCreated)
                 .HasForeignKey(t => t.UserCreatedId)
+                .IsRequired(false)
                 .OnDelete(DeleteBehavior.SetNull);
         }
 

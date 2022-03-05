@@ -3,6 +3,7 @@ using System;
 using BugTracker.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,16 +11,17 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BugTracker.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220305160114_delete-behavior-updated")]
+    partial class deletebehaviorupdated
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.1");
 
             modelBuilder.Entity("BugTracker.Models.Project", b =>
                 {
-                    b.Property<int?>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
@@ -31,7 +33,7 @@ namespace BugTracker.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("UserCreatedId")
+                    b.Property<int>("UserCreatedId")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
@@ -56,12 +58,13 @@ namespace BugTracker.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<int?>("ProjectId")
+                        .IsRequired()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("UserAssignedId")
+                    b.Property<int>("UserAssignedId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("UserCreatedId")
+                    b.Property<int>("UserCreatedId")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
@@ -77,7 +80,7 @@ namespace BugTracker.Migrations
 
             modelBuilder.Entity("BugTracker.Models.User", b =>
                 {
-                    b.Property<int?>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
@@ -104,7 +107,8 @@ namespace BugTracker.Migrations
                     b.HasOne("BugTracker.Models.User", "UserCreated")
                         .WithMany("ProjectsCreated")
                         .HasForeignKey("UserCreatedId")
-                        .OnDelete(DeleteBehavior.SetNull);
+                        .OnDelete(DeleteBehavior.SetNull)
+                        .IsRequired();
 
                     b.Navigation("UserCreated");
                 });
@@ -114,17 +118,20 @@ namespace BugTracker.Migrations
                     b.HasOne("BugTracker.Models.Project", "Project")
                         .WithMany("Tickets")
                         .HasForeignKey("ProjectId")
-                        .OnDelete(DeleteBehavior.SetNull);
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
 
                     b.HasOne("BugTracker.Models.User", "UserAssigned")
                         .WithMany("TicketsAssigned")
                         .HasForeignKey("UserAssignedId")
-                        .OnDelete(DeleteBehavior.SetNull);
+                        .OnDelete(DeleteBehavior.SetNull)
+                        .IsRequired();
 
                     b.HasOne("BugTracker.Models.User", "UserCreated")
                         .WithMany("TicketsCreated")
                         .HasForeignKey("UserCreatedId")
-                        .OnDelete(DeleteBehavior.SetNull);
+                        .OnDelete(DeleteBehavior.SetNull)
+                        .IsRequired();
 
                     b.Navigation("Project");
 

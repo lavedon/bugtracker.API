@@ -7,7 +7,7 @@ namespace BugTracker.Services;
 
 public class ProjectService : IProjectService
 {
-    public int Create(ProjectDTO projectDTO, AppDbContext db)
+    public int? Create(ProjectDTO projectDTO, AppDbContext db)
     {
         User userCreated = db.Users.FirstOrDefault(u => u.Username.Equals(projectDTO.UserCreated));
 

@@ -136,9 +136,11 @@ app.MapDelete("/api/deleteticket/{id}",
 
 app.MapPut("/api/updateticket/{id}",
 [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Standard, Admin")]
-(Ticket ticket, ITicketService ticketService, AppDbContext db) => UpdateTicket(ticket, ticketService, db));
-
-
+(int id, TicketDTO ticket, IProjectService projectService, IUserService userService, ITicketService ticketService, AppDbContext db)
+    => UpdateTicket(id, ticket, projectService, userService, ticketService, db))
+    .Accepts<TicketDTO>("application/json")
+    .Produces<Ticket>(statusCode: 200, contentType: "application/json");
+    
 app.MapPost("/api/createticket", 
 [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Standard, Admin")]
 (TicketDTO ticket, IProjectService projectService, IUserService userService, ITicketService ticketService, AppDbContext db) 
@@ -159,9 +161,29 @@ IResult DeleteTicket(int id, ITicketService ticketService, AppDbContext db)
     return Results.Ok();
 }
 
-IResult UpdateTicket(Ticket ticket, ITicketService ticketService, AppDbContext db)
+IResult UpdateTicket(int id, TicketDTO ticket, IProjectService projectService, IUserService userService, ITicketService ticketService, AppDbContext db)
 {
-    Ticket updatedTicket = ticketService.UpdateTicket(ticket, db);
+    var project = projectService.GetByName(ticket.Project, db);
+    if (project == null)
+    {
+        return Results.BadRequest($"Project {ticket.Project} does not exist");
+    }
+    var userAssigned = userService.GetByName(ticket.UserAssigned, db);
+    if (userAssigned == null)
+    {
+        return Results.BadRequest($"User {ticket.UserAssigned} does not exist");
+    }
+    Ticket newTicket = new Ticket
+    {
+        Id = id,
+        Name = ticket.Name,
+        Description = ticket.Description,
+        Project = project,
+        UserCreated = null!,
+        UserAssigned = userAssigned,
+    };
+   
+    Ticket updatedTicket = ticketService.UpdateTicket(newTicket, db);
 
     if (updatedTicket is null) Results.NotFound("Ticket not found");
 
@@ -171,12 +193,12 @@ IResult UpdateTicket(Ticket ticket, ITicketService ticketService, AppDbContext d
 
 IResult CreateTicket(TicketDTO ticket, IProjectService projectService, IUserService userService, ITicketService ticketService, AppDbContext db)
 {
-    var project = projectService.GetByName(ticket.Project, db);
+    var project = projectService.GetByName(ticket.Project!, db);
     if (project == null)
     {
         return Results.BadRequest($"Project {ticket.Project} does not exist");
     }
-    var userCreated = userService.GetByName(ticket.UserCreated, db);
+    var userCreated = userService.GetByName(ticket.UserCreated!, db);
     if (userCreated == null)
     {
         return Results.BadRequest($"User {ticket.UserCreated} does not exist");
@@ -188,8 +210,8 @@ IResult CreateTicket(TicketDTO ticket, IProjectService projectService, IUserServ
     }
     var newTicket = new Ticket
     {
-        Name = ticket.Name,
-        Description = ticket.Description,
+        Name = ticket.Name!,
+        Description = ticket.Description!,
         Project = project,
         UserCreated = userCreated,
         UserAssigned = userAssigned
@@ -220,7 +242,7 @@ IResult DeleteProject(int id, IProjectService service, AppDbContext db)
 
 IResult CreateProject(ProjectDTO project, IProjectService service, AppDbContext db)
 {
-    int id = service.Create(project, db);
+    int? id = service.Create(project, db);
     return Results.Created($"/CreateProject/{id}", project);
 }
 
